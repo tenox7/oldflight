@@ -196,6 +196,7 @@ void init_SC() {
 		printf("loading %s ...", nameIds[i].filename);
         tre->InitFromFile(nameIds[i].filename);
 		tre->List(stdout);
+		tre->Decompress("D:\\SC");
 		if (tre->IsValid()) {
 			tres.push_back(tre);
 			printf("... Ok \n");
@@ -208,8 +209,15 @@ void init_SC() {
 
 	TreEntry* objViewIFF = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\OBJVIEW.IFF");
 	TreEntry* objViewPAK = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\OBJVIEW.PAK");
+	TreEntry* convPALPAK = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\CONVPALS.PAK");
+	
 
 	PakArchive assets;
+
+
+	assets.InitFromRAM("CONVPALS.PAK", convPALPAK->data, convPALPAK->size);
+	assets.Decompress("D:\\", "bin");
+
 
 	assets.InitFromRAM("OBJVIEW.PAK", objViewPAK->data, objViewPAK->size);
 	assets.List(stdout);
