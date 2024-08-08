@@ -173,7 +173,7 @@ void ParseObjList(IffLexer* lexer) {
 
 		showCases.push_back(showCase);
 		objectCache.emplace(hash, showCase.entity);
-		printf("CACHE SIZE :%d\n", objectCache.size());
+		printf("CACHE SIZE :%llu\n", objectCache.size());
 	}
 }
 
@@ -261,7 +261,7 @@ void init_SC() {
 	area1.InitFromPAKFileName(areaName);
 	
 	std::map<std::string, RSEntity *> ::iterator it;
-	printf("CACHE SIZE :%d\n", objectCache.size());
+	printf("CACHE SIZE :%llu\n", objectCache.size());
 	
 	
 	if (glIsList(F16)) {
