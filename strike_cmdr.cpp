@@ -4,6 +4,8 @@
 #include "libRealSpace/src/RSPalette.h"
 #include "libRealSpace/src/Base.h"
 #include "libRealSpace/src/RSMission.h"
+#include "libRealSpace/librealspace/RSOption.h"
+
 #include <cctype>
 #include "flight_structure.h"
 #include "GL/glut.h"
@@ -196,7 +198,6 @@ void init_SC() {
 		printf("loading %s ...", nameIds[i].filename);
         tre->InitFromFile(nameIds[i].filename);
 		tre->List(stdout);
-		tre->Decompress("D:\\SC");
 		if (tre->IsValid()) {
 			tres.push_back(tre);
 			printf("... Ok \n");
@@ -227,6 +228,9 @@ void init_SC() {
 
 	ParseObjList(&objToDisplay);
 
+	TreEntry* options = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\OPTIONS.IFF");
+	RSOption optioParser;
+	optioParser.InitFromRam(options->data, options->size);
 
 	//TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\TEMPLATE.IFF");
 	TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\MISN-12A.IFF");
