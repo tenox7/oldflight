@@ -132,7 +132,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>false</DataExecutionPrevention>
-      <AdditionalDependencies>C:\Users\ZeBou\source\repos\oldflight\oldflight\x64\Debug\librealspace.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>.\x64\Debug\librealspace.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -213,15 +213,6 @@ void init_SC() {
 	TreEntry* convPALPAK = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\CONVPALS.PAK");
 	
 
-	PakArchive assets;
-
-
-	assets.InitFromRAM("CONVPALS.PAK", convPALPAK->data, convPALPAK->size);
-	assets.Decompress("D:\\", "bin");
-
-
-	assets.InitFromRAM("OBJVIEW.PAK", objViewPAK->data, objViewPAK->size);
-	assets.List(stdout);
 
 	IffLexer objToDisplay;
 	objToDisplay.InitFromRAM(objViewIFF->data, objViewIFF->size);
