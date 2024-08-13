@@ -4,7 +4,7 @@
 #include "libRealSpace/src/RSPalette.h"
 #include "libRealSpace/src/Base.h"
 #include "libRealSpace/src/RSMission.h"
-#include "libRealSpace/librealspace/RSOption.h"
+#include "libRealSpace/librealspace/RSGameflow.h"
 
 #include <cctype>
 #include "flight_structure.h"
@@ -219,9 +219,9 @@ void init_SC() {
 
 	ParseObjList(&objToDisplay);
 
-	TreEntry* options = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\OPTIONS.IFF");
-	RSOption optioParser;
-	optioParser.InitFromRam(options->data, options->size);
+	TreEntry* gameflow = tres[TRE_GAMEFLOW]->GetEntryByName("..\\..\\DATA\\GAMEFLOW\\GAMEFLOW.IFF");
+	RSGameFlow gameFlowParser;
+	gameFlowParser.InitFromRam(gameflow->data, gameflow->size);
 
 	//TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\TEMPLATE.IFF");
 	TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\MISN-12A.IFF");
