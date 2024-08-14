@@ -223,8 +223,8 @@ void init_SC() {
 	RSGameFlow gameFlowParser;
 	gameFlowParser.InitFromRam(gameflow->data, gameflow->size);
 
-	//TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\TEMPLATE.IFF");
-	TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\MISN-12A.IFF");
+	TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\TEMPLATE.IFF");
+	//TreEntry* mission = tres[TRE_MISSIONS]->GetEntryByName("..\\..\\DATA\\MISSIONS\\MISN-12A.IFF");
 	
 	IffLexer missionIFF;
 	missionIFF.InitFromRAM(mission->data, mission->size);
