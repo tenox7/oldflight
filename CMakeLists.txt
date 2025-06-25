@@ -75,3 +75,31 @@ else ()
   	message(FATAL_ERROR "glut not found")
 endif ()
 
+# macOS App Bundle and DMG targets
+if(APPLE)
+    set(APP_NAME "sgiflight")
+    set(APP_BUNDLE_DIR "${CMAKE_BINARY_DIR}/${APP_NAME}.app")
+    set(APP_CONTENTS_DIR "${APP_BUNDLE_DIR}/Contents")
+    set(APP_MACOS_DIR "${APP_CONTENTS_DIR}/MacOS")
+    set(APP_RESOURCES_DIR "${APP_CONTENTS_DIR}/Resources")
+
+    # Custom target to create .app bundle
+    add_custom_target(app
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_CONTENTS_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_MACOS_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCES_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:flight>" "${APP_MACOS_DIR}/"
+        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/Info.plist.in" "${APP_CONTENTS_DIR}/Info.plist"
+        DEPENDS flight
+        COMMENT "Creating macOS app bundle"
+    )
+
+    # Custom target to create DMG
+    add_custom_target(dmg
+        COMMAND ${CMAKE_COMMAND} -E remove -f "sgiflight.dmg"
+        COMMAND hdiutil create -volname "${APP_NAME}" -srcfolder "${APP_BUNDLE_DIR}" -ov -format UDZO "sgiflight.dmg"
+        DEPENDS app
+        COMMENT "Creating DMG file"
+    )
+endif()
+
