@@ -16,6 +16,7 @@
 
 #include "uflight.h"
 #include "objects.h"
+#include <stdlib.h>
 
 static GLfloat shadow_matrix[4][4];
 

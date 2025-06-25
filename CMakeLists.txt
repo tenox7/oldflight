@@ -1,6 +1,11 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(flight)
+
+# Suppress OpenGL deprecation warnings on macOS
+if(APPLE)
+    add_definitions(-DGL_SILENCE_DEPRECATION)
+endif()
 
 
 set (SRCS
@@ -61,11 +66,11 @@ else ()
 endif ()
 
 # Recherche la dépendance externe
-find_package (GLUT)
+find_package (GLUT REQUIRED)
 if (GLUT_FOUND)
 	message(STATUS "add glut dependencies")
   	target_include_directories(flight PUBLIC ${GLUT_INCLUDE_DIRS})
-  	target_link_libraries (flight ${GLUT_LIBRARY})
+  	target_link_libraries (flight ${GLUT_LIBRARIES})
 else ()
   	message(FATAL_ERROR "glut not found")
 endif ()
