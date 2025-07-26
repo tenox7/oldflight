@@ -3,12 +3,21 @@
 #ifdef W32
 #include <windows.h>
 #endif
+
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#else
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#endif
 #include <stdio.h>
 #include "colors.h"
 #include "maths.h"
+
+static GLuint texID[3];
 
 void draw_mouse_cursor(int w, int h, int x, int y);
 void draw_filled_circle(GLfloat x, GLfloat y, GLfloat radius);
