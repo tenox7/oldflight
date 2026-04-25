@@ -101,5 +101,13 @@ if(APPLE)
         DEPENDS app
         COMMENT "Creating DMG file"
     )
+
+    # Signed + notarized DMG (requires DEV_ID and NOTARY_PROFILE in .env or env)
+    add_custom_target(release
+        COMMAND ${CMAKE_SOURCE_DIR}/scripts/release.sh "${APP_NAME}" "${APP_BUNDLE_DIR}" "${CMAKE_BINARY_DIR}/sgiflight.dmg"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        DEPENDS app
+        COMMENT "Signing and notarizing DMG"
+    )
 endif()
 
