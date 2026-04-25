@@ -82,6 +82,14 @@ if(APPLE)
     set(APP_CONTENTS_DIR "${APP_BUNDLE_DIR}/Contents")
     set(APP_MACOS_DIR "${APP_CONTENTS_DIR}/MacOS")
     set(APP_RESOURCES_DIR "${APP_CONTENTS_DIR}/Resources")
+    set(APP_ICON "${CMAKE_BINARY_DIR}/AppIcon.icns")
+
+    add_custom_command(
+        OUTPUT ${APP_ICON}
+        COMMAND ${CMAKE_SOURCE_DIR}/scripts/gen_icon.sh ${CMAKE_SOURCE_DIR}/sgi.png ${APP_ICON}
+        DEPENDS ${CMAKE_SOURCE_DIR}/sgi.png ${CMAKE_SOURCE_DIR}/scripts/gen_icon.sh
+        COMMENT "Generating AppIcon.icns"
+    )
 
     # Custom target to create .app bundle
     add_custom_target(app
@@ -90,7 +98,8 @@ if(APPLE)
         COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCES_DIR}"
         COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:flight>" "${APP_MACOS_DIR}/"
         COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/Info.plist.in" "${APP_CONTENTS_DIR}/Info.plist"
-        DEPENDS flight
+        COMMAND ${CMAKE_COMMAND} -E copy "${APP_ICON}" "${APP_RESOURCES_DIR}/"
+        DEPENDS flight ${APP_ICON}
         COMMENT "Creating macOS app bundle"
     )
 
